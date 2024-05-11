@@ -23,4 +23,4 @@ replacements = {
 
 }
 df = df.replace(replacements)
-df.to_csv('/mnt/3T_disk/liangzuning/NLP_Lab2/dataset/test.csv',index=False)
+df.to_csv('',index=False)
