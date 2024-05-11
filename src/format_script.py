@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-df = pd.read_csv('input.csv')
+df = pd.read_csv('/mnt/3T_disk/liangzuning/NLP_Lab2/rawdata/test.csv')
 replacements = {
     'O': 0,
     'S-GPE': 1,
@@ -23,4 +23,4 @@ replacements = {
 
 }
 df = df.replace(replacements)
-df.to_csv('output.csv',index=False)
+df.to_csv('/mnt/3T_disk/liangzuning/NLP_Lab2/dataset/test.csv',index=False)
