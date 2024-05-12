@@ -12,13 +12,21 @@ class BiLSTM_CRF(nn.Module):
         self.dropout = nn.Dropout(dropout)
         self.linear = nn.Linear(hidden_dim, num_tags)
         self.crf = CRF(num_tags)
-        
+            
     def forward(self, input_ids, target=None):
         embeds = self.embedding(input_ids)
         lstm_out, _ = self.lstm(embeds)
         lstm_out = self.dropout(lstm_out)
         emissions = self.linear(lstm_out)
+        # print(target)
+        emissions = emissions.unsqueeze(1)
+        # print(emissions.shape)
+        # print(emissions)
+        
         if target is not None:
-            return -self.crf(emissions, target, reduction='mean')
+            mask =torch.ByteTensor([0 if d == -1 else 1 for d in target]).to(target.device)
+            target = target.unsqueeze(1) 
+            mask = mask.unsqueeze(1)   
+            return -self.crf(emissions, target,mask=mask)
         else:
             return self.crf.decode(emissions)

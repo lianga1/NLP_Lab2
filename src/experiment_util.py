@@ -2,9 +2,10 @@
 import MyModel
 import torch.optim
 import torch.nn
+import Dataloader
 def select_model(model_param):
     if model_param['model_name'] == 'naive_BiLSTM_CRF':
-        return MyModel.BiLSTM_CRF(vocab_size=1, embedding_dim=100, hidden_dim=200, num_tags=17, dropout=0.5)
+        return MyModel.BiLSTM_CRF(vocab_size=len(Dataloader.word_to_idx), embedding_dim=100, hidden_dim=200, num_tags=17, dropout=0.5)
     # elif model_param == 'ModelB':
     #     return MyModel.ModelB()
     else:

@@ -10,7 +10,7 @@ import pandas as pd
 
 import indx
 
-word_to_idx, label_to_idx = idx.create_mappings('train.csv')
+word_to_idx, label_to_idx = indx.create_mappings('train.csv')
 
 class CSVSequenceDataset(Dataset):
     def __init__(self, filename):

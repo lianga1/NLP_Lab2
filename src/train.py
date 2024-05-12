@@ -15,8 +15,8 @@ def main():
 
     
     # define dataloader
-    train_name = '/mnt/3T_disk/liangzuning/NLP_Lab2/dataset/train.csv'
-    dev_name = '/mnt/3T_disk/liangzuning/NLP_Lab2/dataset/dev.csv'
+    train_name = 'train.csv'
+    dev_name = 'train.csv'
     train_loader,dev_loader = Dataloader.get_dataloader(train_name=train_name, dev_name=dev_name, batch_size=32)
     num_epochs = 1000
 
@@ -26,10 +26,11 @@ def main():
             input_ids = input_ids.to(device)
             targets = targets.to(device)
             optimizer.zero_grad()
-            loss = model(input_ids, targets)
+            loss = torch.mean(model(input_ids, targets))
             loss.backward()
             optimizer.step()
         # 验证和评估逻辑可以在这里添加
+        print(f"Epoch {epoch} loss: {loss}")
     model.save('/mnt/3T_disk/liangzuning/NLP_Lab2/model/model.pth')
     
 if __name__ == '__main__':
